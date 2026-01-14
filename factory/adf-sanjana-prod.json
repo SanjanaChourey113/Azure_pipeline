@@ -1,0 +1,9 @@
+{
+	"name": "adf-sanjana-prod",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "abbd8808-279a-4bdd-be0b-0ab06f9a8edb",
+		"tenantId": "24a2187e-1357-4ecd-92c2-1a0312aa7135"
+	}
+}
