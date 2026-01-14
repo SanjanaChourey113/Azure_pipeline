@@ -1,0 +1,12 @@
+{
+	"name": "IncrementalLoad_10",
+	"properties": {
+		"parameters": {
+			"p_LastWatermark": {
+				"type": "string",
+				"defaultValue": "\"1900-01-01\""
+			}
+		},
+		"annotations": []
+	}
+}
