@@ -26,7 +26,7 @@
 			],
 			"scriptLines": [
 				"parameters{",
-				"     $LastWatermark as string (\"1900-01-01\")",
+				"     LastWatermark as string (\"1900-01-01\")",
 				"}",
 				"source(output(",
 				"          {Row ID} as string,",
@@ -81,7 +81,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 derive(OrderDateNew = OrderDate) ~> derivedColumn1"
+				"select1 derive(OrderDateNew = toTimestamp(OrderDate)) ~> derivedColumn1"
 			]
 		}
 	}
