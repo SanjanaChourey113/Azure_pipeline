@@ -12,7 +12,19 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Pipeline10_result",
+						"type": "DatasetReference"
+					},
+					"name": "sink1",
+					"rejectedDataLinkedService": {
+						"referenceName": "Blob_Storage_DEV",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
 			"transformations": [
 				{
 					"name": "filter1"
@@ -29,10 +41,10 @@
 				"     LastWatermark as string (\"1900-01-01\")",
 				"}",
 				"source(output(",
-				"          {Row ID} as string,",
+				"          {Row ID} as short,",
 				"          {Order ID} as string,",
-				"          {Order Date} as string,",
-				"          {Ship Date} as string,",
+				"          {Order Date} as date,",
+				"          {Ship Date} as date,",
 				"          {Ship Mode} as string,",
 				"          {Customer ID} as string,",
 				"          {Customer Name} as string,",
@@ -40,7 +52,7 @@
 				"          Country as string,",
 				"          City as string,",
 				"          State as string,",
-				"          {Postal Code} as string,",
+				"          {Postal Code} as integer,",
 				"          Region as string,",
 				"          {Product ID} as string,",
 				"          Category as string,",
@@ -48,8 +60,8 @@
 				"          {Product Name} as string,",
 				"          Sales as string,",
 				"          Quantity as string,",
-				"          Discount as string,",
-				"          Profit as string",
+				"          Discount as double,",
+				"          Profit as double",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -81,7 +93,34 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 derive(OrderDateNew = toTimestamp(OrderDate)) ~> derivedColumn1"
+				"select1 derive(OrderDateNew = toTimestamp(OrderDate)) ~> derivedColumn1",
+				"filter1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          {Row ID} as string,",
+				"          {Order ID} as string,",
+				"          {Order Date} as string,",
+				"          {Ship Date} as string,",
+				"          {Ship Mode} as string,",
+				"          {Customer ID} as string,",
+				"          {Customer Name} as string,",
+				"          Segment as string,",
+				"          Country as string,",
+				"          City as string,",
+				"          State as string,",
+				"          {Postal Code} as string,",
+				"          Region as string,",
+				"          {Product ID} as string,",
+				"          Category as string,",
+				"          {Sub-Category} as string,",
+				"          {Product Name} as string,",
+				"          Sales as string,",
+				"          Quantity as string,",
+				"          Discount as string,",
+				"          Profit as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
